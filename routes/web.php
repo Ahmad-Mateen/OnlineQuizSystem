@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,16 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     //Subjects
     Route::prefix('subjects')->name('subject.')->group(function () {
         $controller = SubjectController::class;
+        Route::get('/list', [$controller, 'index'])->name('index');
+        Route::get('/create', [$controller, 'create'])->name('create');
+        Route::post('/save', [$controller, 'save'])->name('save');
+        Route::get('/edit/{id}', [$controller, 'edit'])->name('edit');
+        Route::put('/update', [$controller, 'update'])->name('update');
+        Route::get('/delete/{id}', [$controller, 'delete'])->name('delete');
+    });
+    //Quiz Crud
+    Route::prefix('quiz')->name('quiz.')->group(function () {
+        $controller = QuizController::class;
         Route::get('/list', [$controller, 'index'])->name('index');
         Route::get('/create', [$controller, 'create'])->name('create');
         Route::post('/save', [$controller, 'save'])->name('save');
