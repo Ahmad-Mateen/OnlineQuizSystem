@@ -26,11 +26,9 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::prefix('users')->name('user.')->group(function () {
         $controller = UserController::class;
         Route::get('/list', [$controller, 'index'])->name('index');
-        Route::get('/create', [$controller, 'create'])->name('create');
-        Route::get('/save', [$controller, 'save'])->name('save');
-        Route::get('/edit', [$controller, 'edit'])->name('edit');
-        Route::get('/update', [$controller, 'update'])->name('update');
-        Route::get('/delete', [$controller, 'delete'])->name('delete');
+        Route::get('/edit/{id}', [$controller, 'edit'])->name('edit');
+        Route::put('/update', [$controller, 'update'])->name('update');
+        Route::get('/delete/{id}', [$controller, 'delete'])->name('delete');
     });
     //Subjects
     Route::prefix('subjects')->name('subject.')->group(function () {
@@ -38,12 +36,10 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
         Route::get('/list', [$controller, 'index'])->name('index');
         Route::get('/create', [$controller, 'create'])->name('create');
         Route::post('/save', [$controller, 'save'])->name('save');
-        Route::get('/edit{id}', [$controller, 'edit'])->name('edit');
-        Route::get('/update', [$controller, 'update'])->name('update');
-        Route::get('/delete', [$controller, 'delete'])->name('delete');
+        Route::get('/edit/{id}', [$controller, 'edit'])->name('edit');
+        Route::put('/update', [$controller, 'update'])->name('update');
+        Route::get('/delete/{id}', [$controller, 'delete'])->name('delete');
     });
-
-  
 });
 
 require __DIR__ . '/auth.php';

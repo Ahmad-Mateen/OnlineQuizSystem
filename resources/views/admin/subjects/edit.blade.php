@@ -39,13 +39,15 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title text-center">ADD NEW SUBJECTS</h5>
-                            <form action="{{ route('admin.subject.save') }}" method="POST">
+                            <h5 class="card-title text-center">Edit the Subjects</h5>
+                            <form action="{{ route('admin.subject.update') }}" method="POST">
                                 @csrf
+                                @method('PUT')
+                                <input type="hidden" name="id" value="{{$id}}">
                                 <label>Subject Name</label>
                                 <div class="mb-3 ">
                                     <input type="text" class="form-control  @error('subjectname') is-invalid @enderror"
-                                        autocomplete="off" placeholder="subject Name" name="subjectname" aria-label="Email"
+                                        autocomplete="off" placeholder="subject Name" name="subjectname" aria-label="Email" value="{{$subject->name}}"
                                         aria-describedby="email-addon">
                                 </div>
 

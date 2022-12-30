@@ -34,21 +34,42 @@ class SubjectController extends Controller
             $subject->name = $request->subjectname;
             $subject->slug = Str::slug($request->subjectname);
             $subject->save();
-            return back()->with('message','New Subject has been added!');
+            return redirect()->route('admin.subject.index')->with('message','New Subject has been added!');
         }
        
     }
 
     public function edit($id)
     {
-        
+
+        $subject=Subject::where('id',$id)->first();
+       
+        return view('admin.subjects.edit',compact('subject','id'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+
+       
+        $validated=$request->validate([
+            'subjectname'=>'required',
+        ]);
+        if($validated)
+        {
+           
+            $subject = Subject::where('id', $request->id)->firstOrFail();
+        
+            $subject->name = $request->subjectname;
+            $subject->slug = Str::slug($request->subjectname);
+            $rs=$subject->save();
+           
+            return redirect()->route('admin.subject.index')->with('message','Subject has been updated!');
+        }
     }
 
     public function delete($id)
     {
+        Subject::where('id', $id)->delete();
+        return redirect()->route('admin.subject.index')->with('message','User has been deleted');
     }
 }
