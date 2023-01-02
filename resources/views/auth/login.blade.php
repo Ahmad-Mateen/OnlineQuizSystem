@@ -50,7 +50,7 @@
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('login')}}" method="POST">
+                                    <form action="{{ route('login') }}" method="POST">
                                       @csrf
                                         <label>Email</label>
                                         <div class="mb-3 ">

@@ -22,7 +22,7 @@
         {{-- your actual html start from here here --}}
         <div class="container-fluid">
                 <div class="d-flex flex-row-reverse p-3">
-                    <a href="{{route('admin.quiz.create')}}" class="btn btn-primary">Add Quiz</a>
+                    <a href="{{ route('admin.quiz.create')}}" class="btn btn-primary">Add Quiz</a>
                 </div>
             <div class="row">
                 <div class="col-12">
@@ -44,17 +44,19 @@
                                     <tbody>
                                         @foreach ($quiz as $quiz => $data)
                                             <tr>
-                                                <td> {{ $data->id }} </td>
-                                                <td> {{ $data->subject_id }} </td>
+                                                <td> {{ $data->id }}</td>
+                                                <td> {{ $data->subject_id}} </td>
                                                 <td> {{ $data->name }} </td>
                                                 <td> {{ $data->total_marks }} </td>
                                                 <td> {{ $data->passing_marks }} </td>
 
                                                 <td>
-                                                    <a href="{{ route('admin.subject.edit', $data->id) }}"
-                                                        class="btn btn-primary btn-sm">edit</a>
-                                                    <a href="{{ route('admin.subject.delete', $data->id) }}"
-                                                        class="btn btn-danger btn-sm">delete</a>
+                                                    <a href="{{route('admin.question.index',$data->id)}}"
+                                                        class="btn btn-primary btn-sm">Add Question</a>
+                                                    <a href="{{ route('admin.quiz.edit', $data->id) }}"
+                                                        class="btn btn-secondary btn-sm">Edit</a>
+                                                    <a href="{{ route('admin.quiz.delete', $data->id) }}"
+                                                        class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach

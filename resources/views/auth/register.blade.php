@@ -45,12 +45,12 @@
                                     <p class="mb-0">Enter your email and password to signUp</p>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('userSignup')}}" method="POST" >
+                                    <form action="{{route('register')}}" method="POST" >
                                         @csrf
                                         <label>Name</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control  @error('name') is-invalid @enderror"  autocomplete="off"
-                                            placeholder="Email" name="email" aria-label="Email" aria-describedby="email-addon">
+                                            <input type="text" class="form-control  @error('name') is-invalid @enderror"  autocomplete="off"
+                                            placeholder="name" name="name" aria-label="name" aria-describedby="email-addon">
                                                
                                         </div>
 
@@ -62,8 +62,8 @@
                                             </div>
                                         <label>Password</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control  @error('password') is-invalid @enderror"  autocomplete="off"
-                                            placeholder="Email" name="email" aria-label="Email" aria-describedby="email-addon">
+                                            <input type="password" class="form-control  @error('password') is-invalid @enderror"  autocomplete="off"
+                                            placeholder="password" name="password" aria-label="Email" aria-describedby="email-addon">
                                                
                                             </div>
 
@@ -75,7 +75,7 @@
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Already have an account?
-                                        <a href="{{ route('loginPageView') }}"
+                                        <a href="{{ route('login') }}"
                                             class="text-info text-gradient font-weight-bold">Login</a>
                                     </p>
                                 </div>
@@ -128,10 +128,10 @@
     </footer>
     <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     <!--   Core JS Files   -->
-    <script src="backend/assets/js/core/popper.min.js"></script>
-    <script src="backend/assets/js/core/bootstrap.min.js"></script>
-    <script src="backend/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="backend/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="{{asset('backend/assets/js/core/popper.min.js')}}"></script>
+    <script src="{{asset('backend/assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('backend/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{'backend/assets/js/plugins/perfect-scrollbar.min.js'}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->string('question_description');
             $table->string('type')->default('mcq');
-            $table->integer('marks')->default(1);
+          
             $table->timestamps();
         });
     }
