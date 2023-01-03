@@ -54,9 +54,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/list/{id}', [$controller, 'index'])->name('index');
         Route::get('/create/{id}', [$controller, 'create'])->name('create');
         Route::post('/save', [$controller, 'save'])->name('save');
-        Route::get('/edit/{id}', [$controller, 'edit'])->name('edit');
+        // Route::get('/edit/{id}', [$controller, 'edit'])->name('edit');
         Route::put('/update', [$controller, 'update'])->name('update');
-        Route::get('/delete/{id}', [$controller, 'delete'])->name('delete');
+        Route::get('/delete/{a?}', [$controller, 'delete'])->name('delete');
     });
 });
 

@@ -31,6 +31,7 @@
         },
         "files": [
             "app/Helpers/helper.php"
+            
         ]
     },
     "autoload-dev": {

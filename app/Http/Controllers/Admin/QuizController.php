@@ -41,7 +41,7 @@ class QuizController extends Controller
             $quiz->passing_marks=$request->passingmarks;
             $quiz->Save();
 
-            return redirect()->route('admin.subject.index')->with('message','New Quiz has been added!');
+            return redirect()->route('admin.quiz.index')->with('message','New Quiz has been added!');
         }
 
     }

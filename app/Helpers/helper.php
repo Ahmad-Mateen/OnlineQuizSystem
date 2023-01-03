@@ -8,4 +8,5 @@ function totalUsers(){
 }
 function totalSubjects(){
     return Subject::count();
+    
 }
