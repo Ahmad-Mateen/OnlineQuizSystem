@@ -11,12 +11,27 @@ use App\Models\Question;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserQuizController;
 
-// Route::get('/hash', function () {
-//     return Hash::make('12345678');
-// });
 
-Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+
+// Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/', [UserDashboardController::class, 'userDashboard'])->name('dashboard')->middleware('auth');
+
+Route::prefix('user')->name('user.')->group(function () {
+
+    //Quiz Lists
+    Route::prefix('quiz')->name('quiz.')->group(function () {
+        $controller = UserQuizController::class;
+        Route::get('/list', [$controller, 'getSubject'])->name('getSubject');
+        Route::get('/getQuiz{id}', [$controller, 'getQuiz'])->name('getQuiz');
+    });
+   
+});
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -59,5 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/delete/{a?}', [$controller, 'delete'])->name('delete');
     });
 });
+
 
 require __DIR__ . '/auth.php';

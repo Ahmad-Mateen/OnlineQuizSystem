@@ -12,4 +12,7 @@ class Quiz extends Model
     public function questions(){
         return $this->hasMany(Question::class);
     }
+    // public function subjects(){
+    //     return $this->belongsTo(Subject::class);
+    // }
 }

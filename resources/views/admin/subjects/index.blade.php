@@ -35,7 +35,6 @@
                                         <tr>
                                             <th class=""> ID</th>
                                             <th class=""> Name</th>
-                                            <th class=""> Slug</th>
                                             <th class=""> Action</th>
                                         </tr>
                                     </thead>
@@ -44,7 +43,6 @@
                                             <tr>
                                                 <td> {{ $data->id }} </td>
                                                 <td> {{ $data->name }} </td>
-                                                <td> {{ $data->slug }} </td>
 
                                                 <td>
                                                     <a href="{{ route('admin.subject.edit', $data->id) }}"

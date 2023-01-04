@@ -89,9 +89,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm text-dark " aria-current="page">Dashboard</li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quiz Questions</li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Questions</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Questions</h6>
+                    <h6 class="font-weight-bolder mb-0">Quiz Questions</h6>
                 </nav>
             </div>
         </nav>
@@ -118,7 +118,7 @@
                                         {{ $question->question_description }}
                                     </button>
                                 </div>
-                                <div id="collapse-{{ $question->id }}" class="collapse show"
+                                <div id="collapse-{{ $question->id }}" class="collapse off"
                                     aria-labelledby="heading-{{ $question->id }}" data-parent="#accordion">
                                     <div class="card-body accordion-body">
                                         <form action="javascript:void(0)" class="update_questions" method="POST">
@@ -136,17 +136,25 @@
                                                     </div>
                                                 </div>
                                                 @php
+                                                    // dd($question->options);
                                                     $options = ['a', 'b', 'c', 'd'];
                                                 @endphp
-                                                @foreach ($options as $opt)
-                                                    @foreach ($question->options as $option)
+                                                @foreach ($question->options as $option)
+                                                    @foreach ($options as $opt)
                                                         <div class="col-md-6 p-2">
                                                             <input type="text" class="form-control"
                                                                 name="option_{{ $opt }}"
                                                                 value="{{ old('option_' . $opt . '', $option['option_' . $opt]) }} ">
                                                         </div>
                                                     @endforeach
+
+
+                                                    <div class="col-md-6 p-2">
+                                                        <input type="text" class="form-control" name="answer"
+                                                            value="{{ old('answer', $option['answer']) }} ">
+                                                    </div>
                                                 @endforeach
+
 
                                                 <div class="col-md-12 text-right p-2">
 
@@ -256,9 +264,8 @@
 
             $('body').on("click", ".btnUpdate", function(e) {
                 e.preventDefault();
-                var formData = $('.update_questions').serialize();
-
-
+             
+                var formData = $(this).closest('.card-body').find('.update_questions').serialize();
                 var url = '{{ route('admin.question.update') }}';
 
 
@@ -293,7 +300,7 @@
                     type: 'GET',
                     // data: formData,
                     success: function(data) {
-                        alert(data.message);
+                        alert(data);
                         clearInput();
 
                     }
@@ -319,7 +326,7 @@
                     type: 'POST',
                     data: formData,
                     success: function(data) {
-                        alert(data.message);
+                        alert(data);
                         clearInput();
 
                     }

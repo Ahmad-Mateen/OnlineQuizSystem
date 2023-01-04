@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item text-sm text-dark " aria-current="page">Dashboard</li>
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quiz</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Quiz</h6>
+                    <h6 class="font-weight-bolder mb-0">Creat Quiz</h6>
                 </nav>
             </div>
         </nav>

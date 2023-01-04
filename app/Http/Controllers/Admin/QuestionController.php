@@ -15,7 +15,7 @@ class QuestionController extends Controller
     {
 
         $quiz = Quiz::with('questions', 'questions.options')->find($id);
-
+        
 
         return view('admin.question.index', compact('quiz'));
     }
@@ -30,7 +30,8 @@ class QuestionController extends Controller
     public function save(Request $request)
     {
 
-        $validated = $request->validate([
+       
+        $request->validate([
             'question' => 'required',
             'option_a' => 'required',
             'option_b' => 'required',
@@ -39,8 +40,7 @@ class QuestionController extends Controller
             'answer' => 'required',
         ]);
 
-        if ($validated) {
-
+        
             $question = new Question();
             $question->quiz_id = $request->quizid;
             $question->question_description = $request->question;
@@ -54,26 +54,19 @@ class QuestionController extends Controller
                 $option->option_c = $request->option_c;
                 $option->answer = $request->answer;
                 $option->save();
-                // $this->reset();              
-                $res = [
-                    'status' => 'Success',
-                    'message' => "Success! New Question has been added!",
-
-                ];
-                return response()->json($res);
-
-                return back()->with("New Question has been added!");
+               
+                return response()->json("Success! New Question has been added!");
             } else {
-                return back()->with("Something Went Gone Wrong!");
+                return response()->json("Somthing Went Gone Wrong!");
             }
-        }
+        
     }
 
 
 
     public function update(Request $request)
     {
-
+       
         $request->validate([
             'quetion_description' => 'required',
             'option_a' => 'required',
@@ -83,19 +76,17 @@ class QuestionController extends Controller
         ]);
 
 
-
-        $question = Question::where('id', $request->question_id)->first();
-      
-
-        $question->quiz_id = $request->quiz_id;
+        $question = Question::where('quiz_id', $request->quiz_id)->where('id', $request->question_id)->first();
+       
+        
         $question->question_description = $request->quetion_description;
         $question->save();
 
-       
+        
 
         if ($question) {
 
-            $option = QuestionOptions::where('id', $question->id)->first();
+            $option = QuestionOptions::where('id', $request->question_id)->first();
             $option->question_id  = $question->id;
             $option->option_a = $request->option_a;
             $option->option_b = $request->option_b;
@@ -104,7 +95,6 @@ class QuestionController extends Controller
             $option->answer = $request->answer;
             $option->save();
             return response()->json("Question has been Updated!");
-            
         } else {
             return response()->json("Something Went Gone Wrong!");
         }
@@ -121,6 +111,6 @@ class QuestionController extends Controller
         ];
         return response()->json($res);
 
-        return back();
+        
     }
 }
