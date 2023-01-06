@@ -34,7 +34,7 @@
                                     <thead>
                                         <tr>
                                             <th class="">ID</th>
-                                            <th class="">Subject ID</th>
+                                            <th class="">Subject Name</th>
                                             <th class="">Name</th>
                                             <th class="">Total Marks</th>
                                             <th class="">Passing Marks</th>

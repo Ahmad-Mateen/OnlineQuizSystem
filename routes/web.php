@@ -17,8 +17,8 @@ use App\Http\Controllers\User\UserQuizController;
 
 
 
-// Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-Route::get('/', [UserDashboardController::class, 'userDashboard'])->name('dashboard')->middleware('auth');
+Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth','admin');
+Route::get('/user', [UserDashboardController::class, 'userDashboard'])->name('dashboard')->middleware('auth');
 
 Route::prefix('user')->name('user.')->group(function () {
 
@@ -27,13 +27,18 @@ Route::prefix('user')->name('user.')->group(function () {
         $controller = UserQuizController::class;
         Route::get('/list', [$controller, 'getSubject'])->name('getSubject');
         Route::get('/getQuiz{id}', [$controller, 'getQuiz'])->name('getQuiz');
+        Route::get('/checkAnswer/{a?}', [$controller, 'checkAnswer'])->name('checkAnswer');
     });
    
 });
 
+Route::get('/test', function(){
+    session()->forget('answers');
+});
 
 
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::prefix('admin')->middleware(['auth','admin'])->name('admin.')->group(function () {
 
     //users
     Route::prefix('users')->name('user.')->group(function () {

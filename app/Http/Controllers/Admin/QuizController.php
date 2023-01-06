@@ -11,8 +11,8 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $quiz = Quiz::get();
-
+        $quiz = Quiz::with('subject')->get();
+        // dd($quiz);
         return view('admin.quiz.index', compact('quiz'));
     }
 
@@ -24,9 +24,7 @@ class QuizController extends Controller
 
     public function save(Request $request)
     {   
-        
         $subject=Subject::where('name',$request->subjects)->first();
-        $id=$subject->id;
         $validated=$request->validate([
             'quizname'=>'required',
             'totalmarks'=>'required',
@@ -35,7 +33,7 @@ class QuizController extends Controller
         if($validated)
         {
             $quiz =new Quiz();
-            $quiz->subject_id=$id;
+            $quiz->subject_id=$subject->id;
             $quiz->name=$request->quizname;
             $quiz->total_marks=$request->totalmarks;
             $quiz->passing_marks=$request->passingmarks;
@@ -43,23 +41,18 @@ class QuizController extends Controller
 
             return redirect()->route('admin.quiz.index')->with('message','New Quiz has been added!');
         }
+        return redirect()->back();
 
     }
 
     public function edit($id)
     {
-        // dd($id);
-
         $quiz=Quiz::where('id',$id)->first();
-        // dd($quiz->id);
-
         return view('admin.quiz.edit',compact('quiz'));
     }
 
     public function update(Request $request)
     {
-       
-
         $validated=$request->validate([
             'quizname'=>'required',
             'totalmarks'=>'required',
@@ -75,10 +68,7 @@ class QuizController extends Controller
             $quiz->name=$request->quizname;
             $quiz->total_marks=$request->totalmarks;
             $quiz->passing_marks=$request->passingmarks;
-            $rs=$quiz->save();
-       
-     
-
+            $quiz->save();
             return redirect()->route('admin.quiz.index')->with('message','Quiz has been updated!');
         }
     }

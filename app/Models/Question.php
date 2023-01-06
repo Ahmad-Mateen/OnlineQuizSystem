@@ -10,6 +10,6 @@ class Question extends Model
     use HasFactory;
 
     public function options(){
-        return $this->hasMany(QuestionOptions::class);
+        return $this->hasOne(QuestionOptions::class);
     }
 }
