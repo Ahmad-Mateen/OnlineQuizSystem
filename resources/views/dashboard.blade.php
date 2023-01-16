@@ -15,14 +15,14 @@
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Subjects</li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-                
+
                 </nav>
             </div>
         </nav>
 
         {{-- your actual html start from here here --}}
         <div class="container-fluid py-4">
-            
+
         </div>
     </main>
 @endsection
